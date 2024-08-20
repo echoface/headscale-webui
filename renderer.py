@@ -119,6 +119,11 @@ def render_overview():
         if "magic_dns"   in config_yaml["dns_config"]: magic_dns   = str(config_yaml["dns_config"]["magic_dns"])   
         if "domains"     in config_yaml["dns_config"]: domains     = str(config_yaml["dns_config"]["domains"])     
         if "base_domain" in config_yaml["dns_config"]: base_domain = str(config_yaml["dns_config"]["base_domain"]) 
+    elif "dns" in config_yaml:
+        if "nameservers" in config_yaml["dns"]: nameservers = "global: " + str(config_yaml["dns"]["nameservers"]["global"]) + " split: " + str(config_yaml["dns"]["nameservers"]["split"]) 
+        if "magic_dns"   in config_yaml["dns"]: magic_dns   = str(config_yaml["dns"]["magic_dns"])   
+        if "domains"     in config_yaml["dns"]: domains     = str(config_yaml["dns"]["domains"])     
+        if "base_domain" in config_yaml["dns"]: base_domain = str(config_yaml["dns"]["base_domain"]) 
 
     # Start putting the content together
     overview_content = """
