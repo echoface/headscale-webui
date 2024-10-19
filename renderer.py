@@ -88,11 +88,12 @@ def render_overview():
 
     # General Content variables:
     ip_prefixes, server_url, disable_check_updates, ephemeral_node_inactivity_timeout, node_update_check_interval = "N/A", "N/A", "N/A", "N/A", "N/A"
-    if "ip_prefixes"                       in config_yaml:  ip_prefixes                       = str(config_yaml["ip_prefixes"])
-    if "server_url"                        in config_yaml:  server_url                        = str(config_yaml["server_url"])
-    if "disable_check_updates"             in config_yaml:  disable_check_updates             = str(config_yaml["disable_check_updates"])
-    if "ephemeral_node_inactivity_timeout" in config_yaml:  ephemeral_node_inactivity_timeout = str(config_yaml["ephemeral_node_inactivity_timeout"])
-    if "node_update_check_interval"        in config_yaml:  node_update_check_interval        = str(config_yaml["node_update_check_interval"])
+    if "ip_prefixes"                         in config_yaml:  ip_prefixes                       = str(config_yaml["ip_prefixes"])
+    elif "prefixes"                          in config_yaml:  ip_prefixes                       = str(config_yaml["prefixes"])
+    if "server_url"                          in config_yaml:  server_url                        = str(config_yaml["server_url"])
+    if "disable_check_updates"               in config_yaml:  disable_check_updates             = str(config_yaml["disable_check_updates"])
+    if "ephemeral_node_inactivity_timeout"   in config_yaml:  ephemeral_node_inactivity_timeout = str(config_yaml["ephemeral_node_inactivity_timeout"])
+    if "node_update_check_interval"          in config_yaml:  node_update_check_interval        = str(config_yaml["node_update_check_interval"])
 
     # OIDC Content variables:
     issuer, client_id, scope, use_expiry_from_token, expiry = "N/A", "N/A", "N/A", "N/A", "N/A"
@@ -119,6 +120,11 @@ def render_overview():
         if "magic_dns"   in config_yaml["dns_config"]: magic_dns   = str(config_yaml["dns_config"]["magic_dns"])   
         if "domains"     in config_yaml["dns_config"]: domains     = str(config_yaml["dns_config"]["domains"])     
         if "base_domain" in config_yaml["dns_config"]: base_domain = str(config_yaml["dns_config"]["base_domain"]) 
+    elif "dns" in config_yaml:
+        if "nameservers" in config_yaml["dns"]: nameservers = str(config_yaml["dns"]["nameservers"]) 
+        if "magic_dns"   in config_yaml["dns"]: magic_dns   = str(config_yaml["dns"]["magic_dns"])   
+        if "domains"     in config_yaml["dns"]: domains     = str(config_yaml["dns"]["domains"])     
+        if "base_domain" in config_yaml["dns"]: base_domain = str(config_yaml["dns"]["base_domain"])  
 
     # Start putting the content together
     overview_content = """
